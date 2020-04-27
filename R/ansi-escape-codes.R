@@ -1,7 +1,9 @@
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Reset back to terminal defaults
+#' Reset back to terminal defaults
+#'
+#' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 reset_code <- "\033[39m\033[49m"
 
@@ -19,6 +21,7 @@ reset_code <- "\033[39m\033[49m"
 #'         colour
 #'
 #' @importFrom grDevices col2rgb
+#' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2bg <- function(rcolour) {
   code <- col2code(rcolour)
@@ -28,6 +31,7 @@ col2bg <- function(rcolour) {
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' @rdname col2bg
+#' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2fg <- function(rcolour) {
   code <- col2code(rcolour)

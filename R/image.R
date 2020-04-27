@@ -21,6 +21,37 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 im2ansi <- function(im, width = 80, font_aspect = 0.45) {
 
+  mat <- im2char(im, width, font_aspect)
+
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Collapse
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  rows <- apply(mat, 1, paste0, collapse = "")
+  rows <- paste0(rows, reset_code)
+  paste0(rows, collapse="\n")
+}
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' Convert an image to a matrix of ANSI chars
+#'
+#' @inheritParams im2ansi
+#'
+#' @return Character string with ANSI colours
+#'
+#' @import magick
+#' @importFrom grDevices as.raster
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' im <- image_read(system.file('img', 'Rlogo.png', package = 'png'))
+#' mat <- im2char(im)
+#' }
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+im2char <- function(im, width = 80, font_aspect = 0.45) {
+
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Scale the image:
   #    * for the given font_aspect
@@ -50,10 +81,11 @@ im2ansi <- function(im, width = 80, font_aspect = 0.45) {
   dim(ansi) <- rev(dim(ras))
   ansi <- t(ansi)
 
-  rows <- apply(ansi, 1, paste0, collapse = "")
-  rows <- paste0(rows, reset_code)
-  paste0(rows, collapse="\n")
+  ansi
 }
+
+
+
 
 
 if (FALSE) {
