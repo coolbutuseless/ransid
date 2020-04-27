@@ -1,0 +1,13 @@
+Package: ransid
+Type: Package
+Title: R ANSI Doodat
+Version: 0.1.0
+Author: mikefc
+Maintainer: mikefc <mikefc@coolbutuseless.com>
+Description: R ANSI doodad.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+  magick
+RoxygenNote: 7.1.0

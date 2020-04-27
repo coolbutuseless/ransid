@@ -1,0 +1,78 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+library(ransid)
+library(magick)
+```
+
+# ransid
+
+<!-- badges: start -->
+![](https://img.shields.io/badge/cool-useless-green.svg)
+<!-- badges: end -->
+
+`ransid` converts images to ANSI text which can be displayed in the console.
+
+Note to be confused with:
+
+* [ransid - Rust ANSI Driver](https://gitlab.redox-os.org/redox-os/ransid)
+
+## Installation
+
+You can install `ransid` from [github](https://github.com/coolbutuseless/ransid) with:
+
+``` r
+# install.packages('remotes')
+remotes::install_github("coolbutuseless/ransid")
+```
+
+## Example
+
+**Note** - because ANSI is for display in a terminal, it does not render in a
+markdown document. The following images are screenshots of my Rstudio terminal
+
+
+```{r eval=FALSE}
+im <- image_read(system.file('img', 'Rlogo.png', package = 'png'))
+cat(im2ansi(im, width = 120))
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("man/figures/R.png")
+```
+
+
+
+```{r eval=FALSE}
+im <- magick::image_read('https://www.fillmurray.com/300/250')
+cat(im2ansi(im, width = 120))
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("man/figures/murray.png")
+```
+
+
+
+```{r eval=FALSE}
+im <- magick::image_read('https://placekitten.com/300/200')
+cat(im2ansi(im, width = 120))
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("man/figures/kitten.png")
+```
+
+
+
