@@ -13,8 +13,8 @@
 #' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2bg24 <- function(rcolour) {
-  cols <- t(col2rgb(rcolour))
-  paste0("\033[48;2;", cols[,1], ";", cols[,2], ";", cols[,3], "m")
+  cols <- col2rgb(rcolour)
+  paste0("\033[48;2;", cols[1,], ";", cols[2,], ";", cols[3,], "m")
 }
 
 
@@ -23,6 +23,6 @@ col2bg24 <- function(rcolour) {
 #' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2fg24 <- function(rcolour) {
-  cols <- t(col2rgb(rcolour))
-  paste0("\033[38;2;", cols[,1], ";", cols[,2], ";", cols[,3], "m")
+  cols <- col2rgb(rcolour)
+  paste0("\033[38;2;", cols[1,], ";", cols[2,], ";", cols[3,], "m")
 }

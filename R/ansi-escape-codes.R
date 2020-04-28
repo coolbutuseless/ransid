@@ -43,22 +43,16 @@ col2fg <- function(rcolour) {
 #' @rdname col2bg
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2code <- function(rcolour) {
-  cols <- t(col2rgb(rcolour))
+  cols <- col2rgb(rcolour)
 
-  # ToDo: vectorise properly
-  innerf <- function(col) {
-    if (col[1] == col[2] && col[2] == col[3] && col[1] != 255) {
-      # grey scale
-      val <- as.integer(round(col[1]/255 * 23))
-      code <- 232L + val
-    } else {
-      # colour
-      col  <- as.integer(round(col/255 * 5))
-      code <- 16L + 36L * col[1] + 6 * col[2] + col[3]
-    }
-    code
-  }
+  is_grey        <- cols[1,] == cols[2,] & cols[2,] == cols[3,]
+  possibly_white <- cols[1,] == 255L
 
-  apply(cols, 1, innerf)
+  grey_code <- 232L + as.integer(round(cols[1,]/255 * 23))
+
+  cols <- round(cols/255 * 5)
+  colour_code <- 16L + 36L * cols[1,] + 6 * cols[2,] + cols[3,]
+
+  ifelse(is_grey & !possibly_white, grey_code, colour_code)
 }
 
