@@ -22,7 +22,9 @@ library(magick)
 ![](https://img.shields.io/badge/cool-useless-green.svg)
 <!-- badges: end -->
 
-`ransid` converts images to 256-colour ANSI text which can be displayed in the console.
+`ransid` converts images to 256-colour ANSI text which can be displayed in the console.  
+
+24bit ANSI is also available, but it is not supported by Rstudio console.
 
 Some great R packages for ANSI handling that eclipse what this humble package does:
 
@@ -84,7 +86,7 @@ knitr::include_graphics("man/figures/kitten.png")
 
 24bit colour ANSI is enabled by setting `full_colour = TRUE`
 
-24bit ANSI colour has more limited support, and will **not** display in Rstudio.
+24bit ANSI colour has more limited support (compared to 8bit ANSI), and will **not** display in Rstudio.
 
 It will however work in `iTerm` on OSX, KDE Konsole, Xterm, libvte-based terminals
 such as GNOME Terminal. See [the wikipedia page](https://en.wikipedia.org/wiki/ANSI_escape_code)

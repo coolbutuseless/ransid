@@ -11,6 +11,9 @@
 `ransid` converts images to 256-colour ANSI text which can be displayed
 in the console.
 
+24bit ANSI is also available, but it is not supported by Rstudio
+console.
+
 Some great R packages for ANSI handling that eclipse what this humble
 package does:
 
@@ -62,8 +65,8 @@ cat(im2ansi(im, width = 120))
 
 24bit colour ANSI is enabled by setting `full_colour = TRUE`
 
-24bit ANSI colour has more limited support, and will **not** display in
-Rstudio.
+24bit ANSI colour has more limited support (compared to 8bit ANSI), and
+will **not** display in Rstudio.
 
 It will however work in `iTerm` on OSX, KDE Konsole, Xterm, libvte-based
 terminals such as GNOME Terminal. See [the wikipedia
