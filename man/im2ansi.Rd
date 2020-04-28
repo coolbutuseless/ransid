@@ -4,14 +4,17 @@
 \alias{im2ansi}
 \title{Convert an image to an ANSI string}
 \usage{
-im2ansi(im, width = 80, font_aspect = 0.45)
+im2ansi(im, width = 80, font_aspect = 0.45, full_colour = FALSE)
 }
 \arguments{
 \item{im}{magick image}
 
 \item{width}{text output width. default: 80}
 
-\item{font_aspect}{ratio of width to height for the output font. default: 0.5}
+\item{font_aspect}{ratio of width to height for the output font. default: 0.45}
+
+\item{full_colour}{use 24bit colour codes. default: FALSE. Only supported by
+some terminals}
 }
 \value{
 Character string with ANSI colours

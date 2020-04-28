@@ -5,7 +5,9 @@
 #'
 #' @param im magick image
 #' @param width text output width. default: 80
-#' @param font_aspect ratio of width to height for the output font. default: 0.5
+#' @param font_aspect ratio of width to height for the output font. default: 0.45
+#' @param full_colour use 24bit colour codes. default: FALSE. Only supported by
+#'        some terminals
 #'
 #' @return Character string with ANSI colours
 #'
@@ -19,9 +21,9 @@
 #' cat(im2ansi(im, width = 80))
 #' }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-im2ansi <- function(im, width = 80, font_aspect = 0.45) {
+im2ansi <- function(im, width = 80, font_aspect = 0.45, full_colour = FALSE) {
 
-  mat <- im2char(im, width, font_aspect)
+  mat <- im2char(im, width, font_aspect, full_colour)
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Collapse
@@ -50,7 +52,7 @@ im2ansi <- function(im, width = 80, font_aspect = 0.45) {
 #' mat <- im2char(im)
 #' }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-im2char <- function(im, width = 80, font_aspect = 0.45) {
+im2char <- function(im, width = 80, font_aspect = 0.45, full_colour = FALSE) {
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Scale the image:
@@ -72,7 +74,11 @@ im2char <- function(im, width = 80, font_aspect = 0.45) {
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Get the ANSI match for each colour, and use it to colour a plain 'space'
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ansi <- col2bg(ras)
+  if (full_colour) {
+    ansi <- col2bg24(ras)
+  } else {
+    ansi <- col2bg(ras)
+  }
   ansi <- paste0(ansi, ' ')
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +96,7 @@ im2char <- function(im, width = 80, font_aspect = 0.45) {
 
 if (FALSE) {
   im <- image_read(system.file('img', 'Rlogo.png', package = 'png'))
-  res <- im2ansi(im, width = 80)
+  res <- im2ansi(im, width = 80, full_colour = TRUE)
   cat(res)
 
   ff <- system.file('img', 'magpie.jpg', package = 'ggpattern')

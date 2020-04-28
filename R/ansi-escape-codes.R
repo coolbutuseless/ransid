@@ -8,7 +8,7 @@
 reset_code <- "\033[39m\033[49m"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Convert an R colour to an ansi string
+#' Convert an R colour to a 216-colour ANSI string. Suitable for most terminals
 #'
 #' Ref: \url{https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit}
 #'

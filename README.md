@@ -11,13 +11,15 @@
 `ransid` converts images to 256-colour ANSI text which can be displayed
 in the console.
 
-Note to be confused with:
+Some great R packages for ANSI handling that eclipse what this humble
+package does:
 
   - [crayon](https://cran.r-project.org/package=crayon) the great,
     useful and well-designed ANSI package by Gábor Csárdi and Brodie
     Gaslam
-  - [ransid - Rust ANSI
-    Driver](https://gitlab.redox-os.org/redox-os/ransid)
+  - [fansi](https://cran.r-project.org/web/packages/fansi/index.html)
+    Brodie Gaslam’s comprehensive set of utilities for wrangling strings
+    containing ANSI escape sequences.
 
 ## Installation
 
@@ -29,14 +31,14 @@ You can install `ransid` from
 remotes::install_github("coolbutuseless/ransid")
 ```
 
-## Example
+## Example - 216 colour ANSI
 
 **Note** - because ANSI is for display in a terminal, it does not render
 in a markdown document. The following images are screenshots of my
 Rstudio terminal
 
 ``` r
-im <- image_read(system.file('img', 'Rlogo.png', package = 'png'))
+im <- magick::image_read(system.file('img', 'Rlogo.png', package = 'png'))
 cat(im2ansi(im, width = 120))
 ```
 
@@ -56,40 +58,67 @@ cat(im2ansi(im, width = 120))
 
 <img src="man/figures/kitten.png" width="100%" />
 
+## Example - 24bit ANSI colour
+
+24bit colour ANSI is enabled by setting `full_colour = TRUE`
+
+24bit ANSI colour has more limited support, and will **not** display in
+Rstudio.
+
+It will however work in `iTerm` on OSX, KDE Konsole, Xterm, libvte-based
+terminals such as GNOME Terminal. See [the wikipedia
+page](https://en.wikipedia.org/wiki/ANSI_escape_code) for more
+information
+
+``` r
+im <- magick::image_read('https://placekitten.com/300/200')
+cat(im2ansi(im, width = 200, full_colour = TRUE))
+```
+
+<img src="man/figures/kitten24.png" width="100%" />
+
 ## Access raw ANSI
 
 Lower level functions are also available.
 
-  - `col2bg` - create an ANSI sequence for a particular background
-    colour
-  - `col2fg` - create an ANSI sequence for a particular foreground
-    colour
+  - `col2bg`, `col2bg24` - create an ANSI sequence for a particular
+    background colour (8bit and 24bit versions)
+  - `col2fg`, `col2fg24` - create an ANSI sequence for a particular
+    foreground colour (8bit and 24bit versions)
   - `im2char` - the matrix corresponding to the image, where each
     element represents one pixel
 
-<!-- end list -->
+#### `col2bg`
 
 ``` r
 col2bg('tomato')
 #> [1] "\033[48;5;209m"
 paste0("Hello ", col2bg("tomato"), "#RStats", reset_code)
 #> [1] "Hello \033[48;5;209m#RStats\033[39m\033[49m"
-cat(paste0("Hello ", col2bg("tomato"), "#RStats", reset_code))
-#> Hello [48;5;209m#RStats[39m[49m
+```
+
+``` r
+cat(paste0("Hello ", col2bg("tomato"), "#RStats", reset_code), "\n")
 ```
 
 <img src="man/figures/text1.png" width="20%" />
+
+#### `col2fg`
 
 ``` r
 col2fg('darkgreen')
 #> [1] "\033[38;5;28m"
 paste0("Hello ", col2bg('tomato'), col2fg('darkgreen'), "#RStats", reset_code)
 #> [1] "Hello \033[48;5;209m\033[38;5;28m#RStats\033[39m\033[49m"
-cat(paste0("Hello ", col2bg('tomato'), col2fg('darkgreen'), "#RStats", reset_code))
-#> Hello [48;5;209m[38;5;28m#RStats[39m[49m
+```
+
+``` r
+cat(paste0("Hello ", col2bg('tomato'), col2fg('darkgreen'), "#RStats", reset_code), "\n")
 ```
 
 <img src="man/figures/text2.png" width="20%" />
+
+#### `im2char`
 
 ``` r
 im <- image_read(system.file('img', 'Rlogo.png', package = 'png'))
@@ -99,3 +128,18 @@ char_matrix[1, 1:10]
 #>  [5] "\033[48;5;231m " "\033[48;5;231m " "\033[48;5;231m " "\033[48;5;231m "
 #>  [9] "\033[48;5;231m " "\033[48;5;231m "
 ```
+
+#### `col2bg24`
+
+``` r
+col2bg24('tomato')
+#> [1] "\033[48;2;255;99;71m"
+paste0("Hello ", col2bg24("tomato"), "#RStats", reset_code)
+#> [1] "Hello \033[48;2;255;99;71m#RStats\033[39m\033[49m"
+```
+
+``` r
+cat(paste0("Hello ", col2bg24('tomato'), col2fg24('darkgreen'), "#RStats", reset_code), "\n")
+```
+
+<img src="man/figures/text3.png" width="20%" />

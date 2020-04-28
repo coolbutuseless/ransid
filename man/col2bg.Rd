@@ -4,7 +4,7 @@
 \alias{col2bg}
 \alias{col2fg}
 \alias{col2code}
-\title{Convert an R colour to an ansi string}
+\title{Convert an R colour to a 216-colour ANSI string. Suitable for most terminals}
 \usage{
 col2bg(rcolour)
 
