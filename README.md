@@ -14,8 +14,9 @@ console.
 
   - Supports 8-bit and 24-bit ANSI (but Rstudio terminal only supports
     8-bit colour)
-  - Specify colours standard R colour names e.g. ‘hotpink’, ‘skyblue’
-    and `ransid` will map them to the nearest available ANSI colour
+  - Specify colours using standard R colour names e.g. ‘hotpink’,
+    ‘skyblue’ and `ransid` will map them to the nearest available ANSI
+    colour
 
 ## Installation
 
