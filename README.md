@@ -1,28 +1,21 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ransid
+# ransid <img src="man/figures/logo.png" align="right" height=450/>
 
 <!-- badges: start -->
 
-![](https://img.shields.io/badge/cool-useless-green.svg)
+![](https://img.shields.io/badge/cool-useless-green.svg) [![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-`ransid` converts images to 256-colour ANSI text which can be displayed
-in the console.
-
-24bit ANSI is also available, but it is not supported by Rstudio
+`ransid` converts images to ANSI text which can be displayed in the
 console.
 
-Some great R packages for ANSI handling that eclipse what this humble
-package does:
-
-  - [crayon](https://cran.r-project.org/package=crayon) the great,
-    useful and well-designed ANSI package by Gábor Csárdi and Brodie
-    Gaslam
-  - [fansi](https://cran.r-project.org/web/packages/fansi/index.html)
-    Brodie Gaslam’s comprehensive set of utilities for wrangling strings
-    containing ANSI escape sequences.
+  - Supports 8-bit and 24-bit ANSI (but Rstudio terminal only supports
+    8-bit colour)
+  - Specify colours standard R colour names e.g. ‘hotpink’, ‘skyblue’
+    and `ransid` will map them to the nearest available ANSI colour
 
 ## Installation
 
@@ -146,3 +139,15 @@ cat(paste0("Hello ", col2bg24('tomato'), col2fg24('darkgreen'), "#RStats", reset
 ```
 
 <img src="man/figures/text3.png" width="20%" />
+
+# Related Software
+
+Some great R packages for ANSI handling that eclipse what this humble
+package does:
+
+  - [crayon](https://cran.r-project.org/package=crayon) the great,
+    useful and well-designed ANSI package by Gábor Csárdi and Brodie
+    Gaslam
+  - [fansi](https://cran.r-project.org/web/packages/fansi/index.html)
+    Brodie Gaslam’s comprehensive set of utilities for wrangling strings
+    containing ANSI escape sequences.
