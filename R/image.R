@@ -29,8 +29,8 @@ im2ansi <- function(im, width = 80, font_aspect = 0.45, full_colour = FALSE) {
   # Collapse
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   rows <- apply(mat, 1, paste0, collapse = "")
-  rows <- paste0(rows, reset_code)
-  paste0(rows, collapse="\n")
+  rows <- paste0(rows, reset_code, "\n")
+  paste0(rows, collapse = "")
 }
 
 
