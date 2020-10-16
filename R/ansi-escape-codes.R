@@ -24,8 +24,7 @@ reset_code <- "\033[39m\033[49m"
 #' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2bg <- function(rcolour) {
-  code <- col2code(rcolour)
-  paste0("\033[48;5;", code, "m")
+  ifelse(is.na(rcolour), '', paste0("\033[48;5;", col2code(rcolour), "m"))
 }
 
 
@@ -34,8 +33,7 @@ col2bg <- function(rcolour) {
 #' @export
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 col2fg <- function(rcolour) {
-  code <- col2code(rcolour)
-  paste0("\033[38;5;", code, "m")
+  ifelse(is.na(rcolour), '', paste0("\033[38;5;", col2code(rcolour), "m"))
 }
 
 
